@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31410.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OlympicFlags", "OlympicFlags\OlympicFlags.csproj", "{2CB82E53-7EE1-421F-8D57-A82A3D43C04B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2CB82E53-7EE1-421F-8D57-A82A3D43C04B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CB82E53-7EE1-421F-8D57-A82A3D43C04B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CB82E53-7EE1-421F-8D57-A82A3D43C04B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CB82E53-7EE1-421F-8D57-A82A3D43C04B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2D12E08E-E3CC-4CE0-AA00-C697EB654EBD}
+	EndGlobalSection
+EndGlobal
