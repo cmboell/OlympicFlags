@@ -59,7 +59,7 @@ namespace OlympicFlags.Controllers
                 ActiveGame = TempData?["ActiveGame"]?.ToString() ?? "all",
                 ActiveCategory = TempData?["ActiveCategory"]?.ToString() ?? "all"
             };
-            return View(model);
+            return View(model); //displays view 
         }
     }
 }
