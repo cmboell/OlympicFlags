@@ -59,7 +59,7 @@ namespace OlympicFlags.Models
                 new Country { CountryId = 21, Name = "Ukraine", CategoryId = "i", GameId = "p", SportId = "a", LogoImage = "Ukraine.png" },
                 new Country { CountryId = 22, Name = "Uruguay", CategoryId = "i", GameId = "p", SportId = "a", LogoImage = "Uruguay.png" },
                 new Country { CountryId = 23, Name = "USA", CategoryId = "o", GameId = "s", SportId = "r", LogoImage = "USA.png" },
-                new Country { CountryId = 24, Name = "Zimbabwe", CategoryId = "o", GameId = "s", SportId = "cs", LogoImage = "Zimbabwe.png" }
+                new Country { CountryId = 24, Name = "Zimbabwe", CategoryId = "o", GameId = "p", SportId = "cs", LogoImage = "Zimbabwe.png" }
                 );
         }
     }
