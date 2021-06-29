@@ -1,7 +1,9 @@
 ﻿namespace OlympicFlags.Models
 {
+    //country model
     public class Country
     {
+        //country attributes
         public int CountryId { get; set; }
         public string Name { get; set; }
         public string CategoryId { get; set; }

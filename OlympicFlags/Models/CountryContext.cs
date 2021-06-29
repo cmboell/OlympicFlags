@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-
+//CountryContext model
 namespace OlympicFlags.Models
 {
     public class CountryContext : DbContext

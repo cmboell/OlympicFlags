@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OlympicFlags.Models;
-
+//homecontroller
 namespace OlympicFlags.Controllers
 {
     public class HomeController : Controller

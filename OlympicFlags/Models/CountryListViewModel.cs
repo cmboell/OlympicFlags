@@ -6,7 +6,7 @@ namespace OlympicFlags.Models
     {
         public List<Country> Countries { get; set; }
 
-        // use full properties for Conferences and Divisions 
+        // use full properties for Categories and Games 
         // so can add 'All' item at beginning
         private List<Category> categories;
         public List<Category> Categories {
@@ -19,12 +19,25 @@ namespace OlympicFlags.Models
         }
 
         private List<Game> games;
-        public List<Game> Games {
-            get => games; 
-            set {
+        public List<Game> Games
+        {
+            get => games;
+            set
+            {
                 games = value;
                 games.Insert(0,
                     new Game { GameId = "all", Name = "All" });
+            }
+        }
+             private List<Sport> sports;
+        public List<Sport> Sports
+        {
+            get => sports;
+            set
+            {
+                sports = value;
+                sports.Insert(0,
+                    new Sport { SportId = "all", Name = "All" });
             }
         }
 
@@ -32,7 +45,9 @@ namespace OlympicFlags.Models
         public string CheckActiveCategory(string c) => 
             c.ToLower() == ActiveCategory.ToLower() ? "active" : "";
           
-        public string CheckActiveGame(string d) => 
-            d.ToLower() == ActiveGame.ToLower() ? "active" : "";
+        public string CheckActiveGame(string g) => 
+            g.ToLower() == ActiveGame.ToLower() ? "active" : "";
+        public string CheckActiveSport(string s) =>
+            s.ToLower() == ActiveSport.ToLower() ? "active" : "";
     }
 }
