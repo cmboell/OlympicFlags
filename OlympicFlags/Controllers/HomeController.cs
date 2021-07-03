@@ -29,7 +29,7 @@ namespace OlympicFlags.Controllers
             session.SetActiveCategory(model.ActiveCategory);
             session.SetActiveGame(model.ActiveGame);
             session.SetActiveSport(model.ActiveSport);
-            // if no count value in session, use data in cookie to restore fave teams in session 
+            // if no count value in session, use data in cookie to restore fave countries/teams in session 
             int? count = session.GetMyTeamCount();
             if (count == null)
             {
