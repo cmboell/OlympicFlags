@@ -18,16 +18,7 @@ namespace OlympicFlags.Controllers
 
         public IActionResult Index(CountryListViewModel model)
         {
-            model.Categories = context.Categories.ToList();
-            model.Games = context.Games.ToList();
-            model.Sports = context.Sports.ToList();
-            var session = new OlympicSession(HttpContext.Session);
-            session.SetActiveCategory(model.ActiveCategory);
-            session.SetActiveGame(model.ActiveGame);
-            session.SetActiveSport(model.ActiveSport);
-            // if no count value in session, use data in cookie to restore fave countries/teams in session 
-            int? count = session.GetMyTeamCount();
-            if (count == null)
+            var data = new CountryListViewModel
             {
                 var cookies = new OlympicCookies(HttpContext.Request.Cookies);
                 string[] ids = cookies.GetMyTeamIds();
@@ -42,13 +33,10 @@ namespace OlympicFlags.Controllers
             }
 
             IQueryable<Country> query = context.Countries;
-            if (model.ActiveCategory != "all")
+            if (ActiveCategory != "all")
                 query = query.Where(
-                    t => t.Category.CategoryId.ToLower() == model.ActiveCategory.ToLower());
-            if (model.ActiveGame != "all")
-                query = query.Where(
-                    t => t.Game.GameId.ToLower() == model.ActiveGame.ToLower());
-            if (model.ActiveSport != "all")
+                    t => t.Category.CategoryId.ToLower() == ActiveCategory.ToLower());
+            if (ActiveGame != "all")
                 query = query.Where(
                     t => t.Sport.SportId.ToLower() == model.ActiveSport.ToLower());
             model.Countries = query.ToList();
@@ -56,6 +44,7 @@ namespace OlympicFlags.Controllers
             return View(model);
         }
 
+        [HttpGet]
         public IActionResult Details(string id)
         {
             var session = new OlympicSession(HttpContext.Session);
@@ -70,36 +59,7 @@ namespace OlympicFlags.Controllers
                 ActiveGame = session.GetActiveGame(),
                 ActiveCategory = session.GetActiveCategory()
             };
-            return View(model);
-        }
-
-        [HttpPost]
-        public RedirectToActionResult Add(CountryViewModel model)
-        {
-            model.Country = context.Countries
-                .Include(t => t.Category)
-                .Include(t => t.Game)
-                .Include(t => t.Sport)
-                .Where(t => t.CountryId == model.Country.CountryId)
-                .FirstOrDefault();
-
-            var session = new OlympicSession(HttpContext.Session);
-            var countries = session.GetMyTeams();
-            countries.Add(model.Country);
-            session.SetMyTeams(countries);
-
-            var cookies = new OlympicCookies(HttpContext.Response.Cookies);
-            cookies.SetMyTeamIds(countries);
-
-            TempData["message"] = $"{model.Country.Name} added to your favorites";
-
-            return RedirectToAction("Index",
-                new
-                {
-                    ActiveSport = session.GetActiveSport(),
-                    ActiveGame = session.GetActiveGame(),
-                    ActiveCategory = session.GetActiveCategory()
-                });
+            return View(model); //displays view 
         }
     }
 }
