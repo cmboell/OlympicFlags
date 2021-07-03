@@ -41,7 +41,7 @@ namespace OlympicFlags
                 //custom routing
                 endpoints.MapControllerRoute(
                     name: "custom",
-                    pattern: "{controller=Home}/{action=Index}/conf/{ActiveCategory}/div/{ActiveGame}");
+                    pattern: "{controller=Home}/{action=Index}/cat/{ActiveCategory}/game/{ActiveGame}");
                 //default routing
                 endpoints.MapControllerRoute(
                     name: "default",
