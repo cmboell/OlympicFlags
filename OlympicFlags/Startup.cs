@@ -18,7 +18,11 @@ namespace OlympicFlags
         // Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddRouting(options => options.LowercaseUrls = true);
+
+            services.AddMemoryCache();
+            services.AddSession();
+            services.AddControllersWithViews().AddNewtonsoftJson();
 
             services.AddDbContext<CountryContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("CountryContext")));
@@ -30,14 +34,15 @@ namespace OlympicFlags
             app.UseDeveloperExceptionPage();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
             app.UseEndpoints(endpoints =>
             {
+                //custom routing
                 endpoints.MapControllerRoute(
                     name: "custom",
                     pattern: "{controller=Home}/{action=Index}/conf/{ActiveCategory}/div/{ActiveGame}");
-
+                //default routing
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
