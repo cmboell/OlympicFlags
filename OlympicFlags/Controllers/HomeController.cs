@@ -11,7 +11,6 @@ namespace OlympicFlags.Controllers
 {
     public class HomeController : Controller
     {
-
         private CountryContext context;
 
         public HomeController(CountryContext ctx)
@@ -19,17 +18,14 @@ namespace OlympicFlags.Controllers
             context = ctx;
         }
 
-        public IActionResult Index(CountryListViewModel model)
+        public IActionResult Index(string activeCategory = "all", string activeGame = "all", string activeSport = "all")
         {
-            model.Categories = context.Categories.ToList();
-            model.Games = context.Games.ToList();
-            model.Sports = context.Sports.ToList();
-
             var session = new OlympicSession(HttpContext.Session);
-            session.SetActiveCategory(model.ActiveCategory);
-            session.SetActiveGame(model.ActiveGame);
-            session.SetActiveSport(model.ActiveSport);
-            // if no count value in session, use data in cookie to restore fave countries/teams in session 
+            session.SetActiveCategory(activeCategory);
+            session.SetActiveGame(activeGame);
+            session.SetActiveSport(activeSport);
+
+            // if no count value in session, use data in cookie to restore fave teams in session 
             int? count = session.GetMyTeamCount();
             if (count == null)
             {
@@ -45,16 +41,25 @@ namespace OlympicFlags.Controllers
                 session.SetMyTeams(myteams);
             }
 
+            var model = new CountryListViewModel
+            {
+                ActiveCategory = activeCategory,
+                ActiveGame = activeGame,
+                Categories = context.Categories.ToList(),
+                Games = context.Games.ToList(),
+                Sports = context.Sports.ToList()
+            };
+
             IQueryable<Country> query = context.Countries;
-            if (model.ActiveCategory != "all")
+            if (activeCategory != "all")
                 query = query.Where(
-                    t => t.Category.CategoryId.ToLower() == model.ActiveCategory.ToLower());
-            if (model.ActiveGame != "all")
+                    t => t.Category.CategoryId.ToLower() == activeCategory.ToLower());
+            if (activeGame != "all")
                 query = query.Where(
-                    t => t.Game.GameId.ToLower() == model.ActiveGame.ToLower());
-            if (model.ActiveSport != "all")
+                    t => t.Game.GameId.ToLower() == activeGame.ToLower());
+            if (activeSport != "all")
                 query = query.Where(
-                    t => t.Sport.SportId.ToLower() == model.ActiveSport.ToLower());
+                    t => t.Sport.SportId.ToLower() == activeSport.ToLower());
             model.Countries = query.ToList();
 
             return View(model);
@@ -100,9 +105,9 @@ namespace OlympicFlags.Controllers
             return RedirectToAction("Index",
                 new
                 {
-                    ActiveSport = session.GetActiveSport(),
+                    ActiveCategory = session.GetActiveCategory(),
                     ActiveGame = session.GetActiveGame(),
-                    ActiveCategory = session.GetActiveCategory()
+                    ActiveSport = session.GetActiveSport()
                 });
         }
     }

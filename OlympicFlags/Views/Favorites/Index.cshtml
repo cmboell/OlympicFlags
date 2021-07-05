@@ -10,20 +10,20 @@
            asp-route-activeCategory="@Model.ActiveCategory"
            asp-route-activeGame="@Model.ActiveGame"
            asp-route-activeSport="@Model.ActiveSport">
-            Back to Home Page
+            Back to Home Page <!--button that takes you back to homepage-->
         </a>
         <button type="submit" class="btn btn-primary">
-            Clear Favorites
+            Clear Favorites <!--button that allows you to clear favorites-->
         </button>
     </form>
     <br />
 </div>
 
 
-<div class="row">
+<div class="row">                    <!--code to list favorite country/teams-->
     <div class="col-8 offset-2">
         <ul class="list-group">
-            @foreach (Country country in Model.Countries)
+            @foreach (Country country in Model.Countries) 
             {
                 <li class="list-group-item">
                     <div class="row">
